@@ -58,7 +58,7 @@ var qualityMask2 = function(im) {
 
 
 var gedi_rh_quality = gedi.filter(ee.Filter.calendarRange(4, 9, 'month'))
-                            .map(qualityMask).median();
+                            .map(qualityMask).mean();
 print(gedi_rh_quality)
 var gedi_rh_mean_ic =  gedi_rh_quality//.select(['rh98','digital_elevation_model'])
 Map.addLayer(gedi_rh_mean_ic,{},'l2a_property_check',false);
@@ -179,7 +179,7 @@ Map.addLayer(gedi_metrics_nat,{bands:['nat_cover'],palette:['green']},'nat_cover
 
 // 5 downsample
 // 5-1 create patches
-var china_grids = China_bd.geometry().coveringGrid('EPSG:3857',25000)
+var china_grids = China_bd.geometry().coveringGrid('EPSG:3857',50000)
 Map.addLayer(china_grids,{color:'orange'},'china_grids',false)
 print(china_grids.limit(10))
 
